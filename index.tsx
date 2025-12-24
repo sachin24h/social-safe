@@ -1,0 +1,1 @@
+// Consolidating all logic into index.html for maximum compatibility.

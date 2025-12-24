@@ -1,40 +1,565 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SocialSafe - Pro Margin Checker</title>
+    <title>SocialSafe Pro | Precision Design Laboratory</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-primary: #6366f1;
+            --brand-sky: #0ea5e9;
+            --brand-fuchsia: #d946ef;
+            --brand-violet: #8b5cf6;
+            --brand-glow: rgba(99, 102, 241, 0.5);
+            --bg-canvas: #0f172a; 
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Enforce No Italics Global Rule */
+        * { font-style: normal !important; }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-canvas);
+            color: #f8fafc;
+            margin: 0;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        /* Hide scrollbars for the preview area */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+
+        /* Vibrant Multi-Color Aurora Background */
+        .aurora-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0f172a 100%);
+            overflow: hidden;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .aurora-blob {
+            position: absolute;
+            width: 75vw;
+            height: 75vw;
+            filter: blur(140px);
+            opacity: 0.5;
+            animation: float-aurora 20s infinite alternate ease-in-out;
         }
+        .aurora-1 { background: var(--brand-sky); top: -25%; left: -15%; }
+        .aurora-2 { background: var(--brand-fuchsia); bottom: -15%; right: -10%; animation-delay: -5s; }
+        .aurora-3 { background: var(--brand-violet); top: 20%; left: 30%; animation-delay: -10s; opacity: 0.4; }
+        .aurora-4 { background: var(--brand-primary); bottom: 10%; left: 10%; animation-delay: -15s; opacity: 0.3; }
+
+        @keyframes float-aurora {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(120px, 60px) scale(1.1) rotate(20deg); }
+            100% { transform: translate(-80px, 120px) scale(0.95) rotate(-20deg); }
+        }
+
+        /* Glassmorphism Refined */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(45px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(25px);
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.8);
+        }
+
+        /* Gradient Typography */
+        .gradient-heading {
+            background: linear-gradient(135deg, #ffffff 10%, #60a5fa 50%, #f472b6 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: text-shine 5s linear infinite;
+        }
+        @keyframes text-shine { to { background-position: 200% center; } }
+
+        /* Scrubber Design - Professional & Glassy */
+        input[type='range'] { -webkit-appearance: none; background: transparent; cursor: pointer; width: 100%; }
+        input[type='range']::-webkit-slider-runnable-track { background: rgba(255, 255, 255, 0.1); height: 6px; border-radius: 20px; }
+        input[type='range']::-webkit-slider-thumb { 
+            -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; 
+            background: #ffffff; margin-top: -8px; box-shadow: 0 0 20px var(--brand-glow); 
+            border: 4px solid var(--brand-sky); transition: transform 0.2s ease;
+        }
+        input[type='range']:active::-webkit-slider-thumb { transform: scale(1.4); }
+
+        /* Motion Classes */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+
+        .float { animation: floating 4s ease-in-out infinite; }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* High-Fidelity Device Bezel */
+        .phone-bezel {
+            position: relative;
+            background: #08080a;
+            border: 8px solid #1c1c20;
+            box-shadow: 
+                0 0 0 2px #2d2d34,
+                0 100px 200px -40px rgba(0,0,0,0.9),
+                inset 0 0 20px rgba(255,255,255,0.05);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden; 
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .btn-small {
+            padding: 0.6rem 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-small:hover { transform: scale(1.05); filter: brightness(1.2); }
+        .btn-small:active { transform: scale(0.95); }
     </style>
 <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
 </head>
 <body>
-    <div id="root"></div>
+    <div class="aurora-container">
+        <div class="aurora-blob aurora-1"></div>
+        <div class="aurora-blob aurora-2"></div>
+        <div class="aurora-blob aurora-3"></div>
+        <div class="aurora-blob aurora-4"></div>
+    </div>
+
+    <div id="root" class="min-h-screen w-full flex flex-col relative"></div>
+
+    <script>
+        // --- DATA & CONFIGURATION ---
+        const PLATFORMS = {
+            REELS: { id: 'REELS', name: 'Instagram Reels', ratio: '9:16', theme: '#E1306C', size: '1080x1920', overlap: true },
+            FEED: { id: 'FEED', name: 'Instagram Feed', ratio: '4:5', theme: '#405DE6', size: '1080x1350', overlap: false },
+            TIKTOK: { id: 'TIKTOK', name: 'TikTok', ratio: '9:16', theme: '#000000', size: '1080x1920', overlap: true },
+            SHORTS: { id: 'SHORTS', name: 'YouTube Shorts', ratio: '9:16', theme: '#FF0000', size: '1080x1920', overlap: true }
+        };
+
+        const DEVICES = [
+            { id: 'IP16PM', brand: 'Apple', name: 'iPhone 16 Pro Max', width: 350, height: 760, radius: '64px', notch: 'dynamic' },
+            { id: 'IP16P', brand: 'Apple', name: 'iPhone 16 Pro', width: 330, height: 720, radius: '58px', notch: 'dynamic' },
+            { id: 'S24U', brand: 'Samsung', name: 'Galaxy S24 Ultra', width: 360, height: 780, radius: '14px', notch: 'punch' },
+            { id: 'P9P', brand: 'Google', name: 'Pixel 9 Pro', width: 340, height: 740, radius: '46px', notch: 'punch' },
+            { id: 'NP2', brand: 'Nothing', name: 'Nothing Phone (2)', width: 335, height: 730, radius: '42px', notch: 'punch' }
+        ];
+
+        let state = {
+            view: 'home',
+            media: null,
+            config: {
+                platform: 'REELS',
+                device: 'IP16PM',
+                showSafeAreas: true,
+                showUI: true
+            },
+            video: { playing: false, currentTime: 0, duration: 0, isScrubbing: false }
+        };
+
+        function updateState(updates) {
+            state = { ...state, ...updates };
+            render();
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const url = URL.createObjectURL(file);
+            const type = file.type.startsWith('video/') ? 'video' : 'image';
+            updateState({ media: { url, type }, view: 'studio' });
+        }
+
+        // --- UI COMPONENTS ---
+        function Logo() {
+            return `
+                <div class="flex items-center gap-4 cursor-pointer group" onclick="updateState({view: 'home'})">
+                    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:rotate-90 transition-transform duration-700">
+                        <circle cx="50" cy="50" r="48" fill="url(#logo-grad)" opacity="0.15" />
+                        <rect x="25" y="25" width="50" height="50" rx="14" stroke="url(#logo-grad)" stroke-width="8" fill="transparent" />
+                        <rect x="42" y="42" width="16" height="16" rx="4" fill="white" class="animate-pulse" />
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#0ea5e9"/>
+                                <stop offset="1" stop-color="#d946ef"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-black tracking-tighter leading-none text-white">SocialSafe</span>
+                        <span class="text-[10px] font-black tracking-[0.4em] uppercase text-sky-400">Pro Studio 2025</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getSafeOverlayHTML() {
+            if (!state.config.showSafeAreas) return '';
+            const plat = PLATFORMS[state.config.platform];
+            const isFeed = plat.id === 'FEED';
+            return `
+                <div class="absolute inset-0 z-30 pointer-events-none">
+                    <div class="absolute inset-0 grid grid-cols-3 grid-rows-3 opacity-20">
+                        ${Array(9).fill('<div class="border border-white/30"></div>').join('')}
+                    </div>
+                    <div class="absolute top-0 w-full h-[15%] bg-red-500/10 border-b border-red-500/40 flex items-end justify-center pb-2">
+                        <span class="text-[8px] font-black text-white uppercase tracking-widest bg-red-600 px-1.5 rounded-sm">Header Danger Zone</span>
+                    </div>
+                    <div class="absolute bottom-0 w-full h-[32%] bg-red-500/10 border-t border-red-500/40 flex items-start justify-center pt-2">
+                        <span class="text-[8px] font-black text-white uppercase tracking-widest bg-red-600 px-1.5 rounded-sm">Interaction Hazard</span>
+                    </div>
+                    ${!isFeed ? `<div class="absolute right-0 top-[15%] bottom-[32%] w-[20%] bg-yellow-500/10 border-l border-yellow-500/30"></div>` : ''}
+                </div>`;
+        }
+
+        function getUIMockHTML() {
+            if (!state.config.showUI) return '';
+            const plat = PLATFORMS[state.config.platform];
+            
+            if (plat.id === 'FEED') {
+                return `
+                    <div class="absolute inset-0 z-40 text-white pointer-events-none select-none flex flex-col justify-between">
+                        <!-- Feed Header -->
+                        <div class="w-full bg-black/80 backdrop-blur-md p-4 flex justify-between items-center border-b border-white/5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-neutral-800 border border-white/10"></div>
+                                <span class="font-bold text-xs">socialsafe_pro</span>
+                            </div>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                        </div>
+                        <!-- Feed Footer -->
+                        <div class="w-full bg-black/90 backdrop-blur-xl p-4 space-y-3 border-t border-white/5 pb-8">
+                            <div class="flex justify-between items-center">
+                                <div class="flex gap-4">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3.5z"/></svg>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                </div>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <div class="text-[11px] leading-relaxed">
+                                <span class="font-black mr-2">socialsafe_pro</span>
+                                Accurate 4:5 Feed safe zones. Check your head-space and text placements.
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            // Reels/TikTok Overlap Style - Adjusted positioning for better visibility
+            return `
+                <div class="absolute inset-0 z-40 text-white pointer-events-none select-none flex flex-col justify-between p-6">
+                    <div class="flex justify-between items-center pt-2 -mx-6 px-6 bg-gradient-to-b from-black/60 to-transparent">
+                        <div class="flex items-center gap-3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="m15 18-6-6 6-6"/></svg><span class="font-extrabold text-lg tracking-tight">${plat.name.split(' ')[1] || plat.name}</span></div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M23 19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    </div>
+                    
+                    <div class="flex justify-between items-end pb-8">
+                        <!-- Profile & Caption -->
+                        <div class="flex-1 space-y-4 pr-12">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-400 via-pink-500 to-amber-500 p-[2px] shadow-2xl"><div class="w-full h-full rounded-full bg-neutral-900"></div></div>
+                                <span class="font-black text-sm drop-shadow-lg">socialsafe.lab</span>
+                            </div>
+                            <p class="text-[12px] font-bold leading-relaxed drop-shadow-xl line-clamp-2">Test your vertical layouts with mathematically accurate device chassis. #creative #design</p>
+                            <div class="flex items-center gap-2 bg-white/20 w-fit px-3 py-1 rounded-full text-[9px] font-black border border-white/20 backdrop-blur-3xl uppercase tracking-widest shadow-xl">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Trending Audio
+                            </div>
+                        </div>
+
+                        <!-- Action Sidebar - FIXED VISIBILITY -->
+                        <div class="flex flex-col gap-6 items-center">
+                            <div class="flex flex-col items-center">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <span class="text-[10px] font-bold mt-1 shadow-lg">12K</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3.5z"/></svg>
+                                <span class="text-[10px] font-bold mt-1 shadow-lg">452</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                <span class="text-[10px] font-bold mt-1 shadow-lg">Share</span>
+                            </div>
+                            <div class="w-7 h-7 rounded-lg border-2 border-white/50 overflow-hidden bg-neutral-800 p-0.5">
+                                <div class="w-full h-full bg-neutral-500 rounded-[2px]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        // --- VIEW RENDERS ---
+        function renderHome() {
+            return `
+                <div class="flex-1 flex flex-col items-center">
+                    <!-- Navigation -->
+                    <nav class="w-full flex items-center justify-between px-16 py-12 z-50 sticky top-0 backdrop-blur-3xl bg-transparent border-b border-white/5">
+                        ${Logo()}
+                        <div class="flex items-center gap-12">
+                            <a href="#lab" class="text-[11px] font-black uppercase tracking-[0.4em] text-white/30 hover:text-white transition-all">Device Lab</a>
+                            <button onclick="updateState({view: 'studio'})" class="btn-small glass border-sky-400/30 text-sky-200 hover:bg-sky-500/10">Launch Workspace</button>
+                        </div>
+                    </nav>
+
+                    <!-- Hero -->
+                    <section class="min-h-screen flex flex-col items-center justify-center text-center px-10 -mt-32">
+                        <div class="inline-flex items-center gap-4 px-8 py-3 rounded-full glass border border-sky-400/40 text-[12px] font-black tracking-[0.6em] text-sky-300 mb-16 uppercase slide-up">
+                            Master Your Social Media Frame
+                        </div>
+                        <h1 class="text-8xl md:text-[13rem] font-black tracking-tighter leading-none mb-14 gradient-heading">
+                            ZERO <br/> CLIPPING.
+                        </h1>
+                        <p class="max-w-6xl text-3xl md:text-6xl text-white/30 font-bold mb-24 leading-[1.1] tracking-tight">
+                            Ultra-precision laboratory for simulating <span class="text-white">real device dimensions</span> and 2025 native UI overlays.
+                        </p>
+                        
+                        <div class="flex flex-col md:flex-row gap-12 items-center reveal">
+                            <label class="cursor-pointer bg-white text-black px-12 py-6 rounded-[50px] text-2xl font-black flex items-center gap-5 hover:scale-105 active:scale-95 transition-all shadow-[0_50px_100px_-20px_rgba(56,189,248,0.7)]">
+                                <input type="file" class="hidden" accept="image/*,video/*" onchange="handleFileSelect(event)">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                UPLOAD CONTENT
+                            </label>
+                            <div class="text-left space-y-1">
+                                <span class="block text-3xl font-black tracking-tighter">Studio Pro 2.5</span>
+                                <span class="text-white/20 text-[11px] font-black uppercase tracking-[0.5em]">Frame-By-Frame Precision</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bento Feature Showcase -->
+                    <section id="lab" class="max-w-7xl w-full px-16 py-60 grid grid-cols-1 md:grid-cols-4 gap-14">
+                        <div class="glass-card col-span-2 p-20 rounded-[100px] min-h-[650px] relative overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000" />
+                            <div class="relative z-10 flex flex-col justify-end h-full">
+                                <h3 class="text-6xl font-black mb-8 leading-[0.9]">Hardware <br/> Accurate.</h3>
+                                <p class="text-2xl text-white/40 font-bold leading-relaxed">Simulate actual iPhone 16 Pro Max and S24 Ultra chassis dimensions with correct corner radii and notches.</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-16 rounded-[100px] bg-gradient-to-br from-sky-500/20 to-pink-600/30 flex flex-col justify-end border-white/5">
+                            <div class="mb-14 w-24 h-24 glass rounded-[40px] flex items-center justify-center float shadow-2xl border-white/20">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M12 3v18"/><path d="M3 12h18"/></svg>
+                            </div>
+                            <h3 class="text-5xl font-black mb-6">Safe Zones.</h3>
+                            <p class="text-lg text-white/40 font-bold">Rule-of-thirds and UI interaction heatmaps updated for the 2025 platform algorithms.</p>
+                        </div>
+                        <div class="glass-card p-16 rounded-[100px] flex flex-col justify-end border-white/5">
+                            <h3 class="text-5xl font-black mb-6">Timeline Lab.</h3>
+                            <p class="text-lg text-white/40 font-bold">Scrub through every second of your video. Ensure zero interaction overlap during the entire clip.</p>
+                        </div>
+                    </section>
+
+                    <!-- Pro Footer -->
+                    <footer class="w-full p-40 flex flex-col items-center gap-16 bg-black/40 backdrop-blur-3xl mt-40 border-t border-white/5">
+                        ${Logo()}
+                        <div class="flex gap-20 text-[11px] font-black tracking-[0.7em] uppercase text-white/30">
+                            <a href="#" class="hover:text-sky-400 transition-all">Studio Workspace</a>
+                            <a href="#" class="hover:text-sky-400 transition-all">Hardware Simulation</a>
+                            <a href="#" class="hover:text-sky-400 transition-all">Lab Precision</a>
+                        </div>
+                        <p class="text-[11px] text-white/5 font-black tracking-[0.6em] uppercase">© 2025 SocialSafe Pro Studio Lab • GitHub Edition</p>
+                    </footer>
+                </div>`;
+        }
+
+        function renderStudio() {
+            const dev = DEVICES.find(d => d.id === state.config.device) || DEVICES[0];
+            const plat = PLATFORMS[state.config.platform];
+
+            return `
+                <div class="flex-1 flex flex-col lg:flex-row h-screen overflow-hidden slide-up">
+                    <!-- Control Panel (Sidebar) -->
+                    <aside class="w-full lg:w-[480px] glass h-full flex flex-col p-12 z-50 overflow-y-auto no-scrollbar border-r border-white/5">
+                        <div class="flex items-center justify-between mb-24">
+                            <div class="cursor-pointer hover:scale-105 transition-transform" onclick="updateState({view: 'home'})">
+                                ${Logo()}
+                            </div>
+                            <span class="text-[10px] font-black text-sky-400 tracking-[0.5em] uppercase">Studio Control</span>
+                        </div>
+
+                        <div class="space-y-20">
+                            <section>
+                                <label class="text-[11px] font-black uppercase tracking-[0.6em] text-white/20 mb-8 block">01 / Target Format</label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    ${Object.values(PLATFORMS).map(p => `
+                                        <button onclick="updateState({config: {...state.config, platform: '${p.id}'}})" 
+                                            class="flex flex-col items-start p-7 rounded-[40px] border transition-all ${state.config.platform === p.id ? 'bg-white text-black border-white shadow-2xl scale-[1.03]' : 'glass border-white/5 hover:border-white/20'}">
+                                            <span class="text-lg font-black tracking-tighter">${p.name.split(' ')[1] || p.name}</span>
+                                            <span class="text-[10px] font-black opacity-40 uppercase tracking-widest mt-1">${p.size}</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </section>
+
+                            <section>
+                                <label class="text-[11px] font-black uppercase tracking-[0.6em] text-white/20 mb-8 block">02 / Lab Hardware</label>
+                                <div class="relative group">
+                                    <select onchange="updateState({config: {...state.config, device: this.value}})" class="w-full glass rounded-[36px] py-6 px-10 text-lg font-black outline-none border-white/10 hover:border-sky-500 appearance-none cursor-pointer transition-all">
+                                        ${DEVICES.map(d => `<option value="${d.id}" ${state.config.device === d.id ? 'selected' : ''} class="bg-[#1e1b4b]">${d.name} (${d.brand})</option>`).join('')}
+                                    </select>
+                                    <div class="absolute right-10 top-1/2 -translate-y-1/2 pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5"><path d="m6 9 6 6 6-6"/></svg></div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <label class="text-[11px] font-black uppercase tracking-[0.6em] text-white/20 mb-8 block">03 / Display Config</label>
+                                <div class="glass p-10 rounded-[56px] space-y-10 border border-white/5 shadow-inner">
+                                    <label class="flex justify-between items-center cursor-pointer group">
+                                        <span class="text-base font-black text-white/40 group-hover:text-white transition-all">Native UI Overlays</span>
+                                        <input type="checkbox" ${state.config.showUI ? 'checked' : ''} onchange="updateState({config: {...state.config, showUI: this.checked}})" class="w-14 h-8 accent-sky-500 cursor-pointer">
+                                    </label>
+                                    <label class="flex justify-between items-center cursor-pointer group">
+                                        <span class="text-base font-black text-white/40 group-hover:text-white transition-all">Safe Area Grids</span>
+                                        <input type="checkbox" ${state.config.showSafeAreas ? 'checked' : ''} onchange="updateState({config: {...state.config, showSafeAreas: this.checked}})" class="w-14 h-8 accent-sky-500 cursor-pointer">
+                                    </label>
+                                </div>
+                            </section>
+                        </div>
+
+                        <div class="mt-auto pt-20">
+                            <label class="btn-small glass border-sky-400/30 text-sky-200 hover:bg-sky-500/10 flex items-center justify-center gap-5 py-6 cursor-pointer">
+                                <input type="file" class="hidden" accept="image/*,video/*" onchange="handleFileSelect(event)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                SWAP CONTENT
+                            </label>
+                        </div>
+                    </aside>
+
+                    <!-- Laboratory Preview -->
+                    <main class="flex-1 relative flex flex-col items-center justify-center p-16 bg-transparent">
+                        <div class="absolute top-12 flex items-center gap-6 px-10 py-5 glass rounded-full text-[12px] font-black uppercase tracking-[0.5em] text-sky-300 border border-white/20 z-10 shadow-2xl">
+                            <span class="w-3.5 h-3.5 rounded-full bg-sky-500 animate-pulse"></span>
+                            ACTIVE MONITOR: ${plat.name} • ${dev.name}
+                        </div>
+
+                        <!-- MATHEMATICALLY ACCURATE DEVICE SIMULATION -->
+                        <div class="flex-1 flex items-center justify-center w-full relative">
+                            <div id="device-shell" class="phone-bezel transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                                 style="width: ${dev.width}px; height: ${dev.height}px; border-radius: ${dev.radius}; border-width: 10px;">
+                                
+                                <!-- Hardware Notch Design -->
+                                ${dev.notch === 'dynamic' ? `<div class="absolute top-5 left-1/2 -translate-x-1/2 w-40 h-11 bg-black rounded-full z-50 flex items-center justify-end px-7 border border-white/10 shadow-inner"><div class="w-3 h-3 rounded-full bg-sky-600/30 ring-1 ring-sky-400/50"></div></div>` : ''}
+                                ${dev.notch === 'punch' ? `<div class="absolute top-9 left-1/2 -translate-x-1/2 w-7 h-7 bg-black rounded-full z-50 ring-2 ring-black"></div>` : ''}
+                                
+                                <div class="absolute inset-0 bg-[#0c0c16] flex items-center justify-center overflow-hidden">
+                                    ${state.media ? `
+                                        <!-- Container matches inner radius of the bezel -->
+                                        <div class="w-full h-full relative overflow-hidden" 
+                                             style="border-radius: calc(${dev.radius} - 10px);">
+                                            ${state.media.type === 'video' 
+                                                ? `<video id="main-video" src="${state.media.url}" class="w-full h-full object-cover" loop playsinline autoplay muted></video>`
+                                                : `<img src="${state.media.url}" class="w-full h-full object-cover">`}
+                                            ${getSafeOverlayHTML()}
+                                            ${getUIMockHTML()}
+                                        </div>
+                                    ` : `
+                                        <div class="flex flex-col items-center gap-12 opacity-15 text-center p-20 animate-pulse">
+                                            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><polyline points="16 5 21 5 21 10"/><line x1="9" y1="15" x2="21" y2="3"/></svg>
+                                            <span class="text-lg font-black tracking-[0.7em] uppercase">No Active Signal</span>
+                                        </div>
+                                    `}
+                                </div>
+                                
+                                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-44 h-2 bg-white/30 rounded-full z-50"></div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Timeline Lab -->
+                        ${state.media?.type === 'video' ? `
+                            <div class="w-full max-w-6xl glass p-12 rounded-[72px] mt-16 flex items-center gap-14 shadow-2xl slide-up">
+                                <button id="play-btn" class="w-24 h-24 bg-white text-black rounded-[36px] flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-2xl">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="black"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>
+                                </button>
+                                <div class="flex-1 space-y-10">
+                                    <div class="flex justify-between text-[14px] font-black uppercase tracking-[0.5em]">
+                                        <span class="text-sky-400">Head: ${state.video.currentTime.toFixed(3)}s</span>
+                                        <span class="text-white/10">Length: ${state.video.duration.toFixed(3)}s</span>
+                                    </div>
+                                    <input type="range" id="video-slider" class="w-full" min="0" step="0.001" value="${state.video.currentTime}" max="${state.video.duration}">
+                                </div>
+                            </div>
+                        ` : ''}
+                    </main>
+                </div>`;
+        }
+
+        // --- RENDER ENGINE ---
+        function render() {
+            const root = document.getElementById('root');
+            root.innerHTML = state.view === 'home' ? renderHome() : renderStudio();
+
+            // Hook video logic
+            if (state.view === 'studio' && state.media?.type === 'video') {
+                const video = document.getElementById('main-video');
+                const slider = document.getElementById('video-slider');
+                const playBtn = document.getElementById('play-btn');
+                
+                if (video && slider) {
+                    video.onloadedmetadata = () => {
+                        updateState({ video: { ...state.video, duration: video.duration } });
+                    };
+                    video.ontimeupdate = () => {
+                        if (!state.video.isScrubbing) {
+                            slider.value = video.currentTime;
+                            const timeText = document.querySelector('.text-sky-400');
+                            if (timeText) timeText.textContent = `Head: ${video.currentTime.toFixed(3)}s`;
+                        }
+                    };
+                    slider.oninput = (e) => {
+                        state.video.isScrubbing = true;
+                        video.currentTime = parseFloat(e.target.value);
+                    };
+                    slider.onchange = () => { state.video.isScrubbing = false; };
+                    
+                    playBtn.onclick = () => {
+                        if (video.paused) {
+                            video.play();
+                            playBtn.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="black"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>';
+                        } else {
+                            video.pause();
+                            playBtn.innerHTML = '<svg width="32" height="32" viewBox="0 0 24 24" fill="black" class="ml-2"><path d="M5 3l14 9-14 9V3z"/></svg>';
+                        }
+                    };
+                }
+            }
+
+            // Reveal Animation Observers
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.glass-card, .reveal').forEach(el => observer.observe(el));
+        }
+
+        render();
+    </script>
 </body>
 </html>
