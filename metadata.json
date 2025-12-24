@@ -1,0 +1,7 @@
+{
+  "name": "SocialSafe - Pro Margin Checker",
+  "description": "A high-fidelity tool for creators to check safe areas and UI overlays for Instagram, YouTube, and TikTok content.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
